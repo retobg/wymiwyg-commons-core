@@ -12,14 +12,9 @@
 -->
 
   
-
-  
-  <property name="build.dir"    value="./build"/>
   
   <property environment="env"/>
-  <property name="deploy.classes"  value="${build.dir}/classes"/>
-  <property name="dist.jar"       value="wymiwyg-commons-core.jar"/>
-  <property name="javadoc.home"   value="${build.dir}/javadoc"/>
+
   
 
   <!-- Construct the classpath -->
@@ -32,8 +27,8 @@
 
 
  <target name="prepare">
-  	<mkdir dir="${build.dir}"/>
-  	<mkdir dir="${deploy.classes}"/>
+  	<mkdir dir="build"/>
+  	<mkdir dir="build/classes"/>
   </target>
 
 
@@ -44,7 +39,7 @@
 
 
   <target name="clean">
-    <delete dir="${build.dir}"/>
+    <delete dir="build"/>
   </target>
 
 
@@ -75,14 +70,14 @@
         dir="lib"
         includes="*.jar"/>
       <targetfileset
-        dir="${deploy.classes}"
+        dir="build/classes"
         includes="**/*.class"/>
     </dependset>
-    <javac srcdir="src" destdir="${deploy.classes}"
+    <javac srcdir="src" destdir="build/classes"
            debug="on" optimize="on" deprecation="on" target="1.5" source="1.5">
       <classpath refid="project.class.path"/>
     </javac>
-    <copy   todir="${deploy.classes}">
+    <copy   todir="build/classes">
       <fileset dir="src" includes="**/*.properties"/>
       <fileset dir="src" includes="**/*.txt"/>
       <fileset dir="src" includes="**/*.rdf"/>
@@ -104,7 +99,7 @@
     <javadoc packagenames="**.*, "
 	     sourcefiles="src/**/*.java"
 	     sourcepath="src"
-             destdir="${javadoc.home}">
+             destdir="build/javadoc">
 	  <classpath refid="project.class.path"/>
 	</javadoc>
   </target>
@@ -119,8 +114,8 @@
 
 
   <target name="dist" depends="prepare,compile">
-    <jar jarfile="${build.dir}/${dist.jar}"
-         basedir="${deploy.classes}"/>
+    <jar jarfile="build/${ant.project.name}.jar"
+         basedir="build/classes"/>
   </target>
   
  
