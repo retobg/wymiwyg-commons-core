@@ -63,20 +63,45 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 /**
  * @author reto
  */
 public class ArgumentHandler {
-	
+
 	List argumentList = new ArrayList();
+
 	/**
 	 * 
 	 */
 	public ArgumentHandler(String[] arguments) {
-		argumentList.addAll(Arrays.asList(arguments)); //ArrayList is guaranteed to support Remove
+		argumentList.addAll(Arrays.asList(arguments)); // ArrayList is
+		// guaranteed to support
+		// Remove
 	}
-	public void processArguments(ArgumentProcessor processor) throws InvalidArgumentsException {
+
+	public void processArguments(ArgumentProcessor processor)
+			throws InvalidArgumentsException {
 		processor.process(argumentList);
+	}
+
+	/**
+	 * This methods uses <code>AnnotatedInterfaceArguments</code> to return an
+	 * instance of the specified class with methods returning values from the
+	 * arguments of this Handler.
+	 * 
+	 * Note that the interface must be annotated using <code>CommandLine</code>.
+	 * 
+	 * @param <I> the type of the interface
+	 * @param interfaceClass a class instance for I, i.e. <em>I</em>.class 
+	 * @return an object of type I 
+	 * @throws InvalidArgumentsException thrown when the argument-list doesn't match the definition in the interface annotations
+	 */
+	public <I> I getInstance(Class<I> interfaceClass)
+			throws InvalidArgumentsException {
+		I instance;
+		instance = AnnotatedInterfaceArguments
+				.getInstance(interfaceClass, this).getValueObject();
+
+		return instance;
 	}
 }
