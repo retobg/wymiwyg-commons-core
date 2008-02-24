@@ -6,9 +6,8 @@
 	<groupId>org.wymiwyg</groupId>
 	<artifactId>wymiwyg-commons-core</artifactId>
 	<version>0.7</version>
-	<description>
-		A set of utility classes and dependencies
-	</description>
+	<packaging>bundle</packaging>
+	<description>A set of utility classes and dependencies</description>
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -56,6 +55,19 @@
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>1.2.1</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Export-Package>
+							org.wymiwyg.commons.*
+						</Export-Package>
+					</instructions>
 				</configuration>
 			</plugin>
 		</plugins>
