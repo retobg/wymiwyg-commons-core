@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.wymiwyg</groupId>
+	<artifactId>wymiwyg-commons-core</artifactId>
+	<version>0.7</version>
+	<description>
+		A set of utility classes and dependencies
+	</description>
+	<dependencies>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging-api</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>3.4.4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.2</version>
+		</dependency>
+	</dependencies>
+	<distributionManagement>
+		<!-- <repository>
+			<id>wymiwyg-repository</id>
+			<name>wymiwyg repository</name>
+			<url>http://wymiwyg.org/maven2</url>
+			</repository> -->
+		<repository>
+			<id>berlios-wymiwyg-repository</id>
+			<name>wymiwyg repository on berlios svn</name>
+			<url>
+				scp://shell.berlios.de/home/groups/wymiwyg/htdocs/maven2
+			</url>
+
+			<!-- <url>svn://developername@svn.berlios.de/svnroot/repos/wymiwyg/maven2</url> -->
+			<!-- <url>https://svn.berlios.de/svnroot/repos/wymiwyg/maven2</url> -->
+		</repository>
+	</distributionManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+
