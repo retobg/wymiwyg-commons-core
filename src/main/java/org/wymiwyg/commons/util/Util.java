@@ -66,7 +66,6 @@ import java.util.Date;
 
 import org.wymiwyg.commons.util.text.W3CDateFormat;
 
-
 /**
  * @author reto
  */
@@ -76,24 +75,15 @@ public class Util {
 	 * @param resource
 	 * @param model
 	 */
-	/*public static void adaptRating(
-		Resource resource,
-		float ratingFactor,
-		int defaultRating)
-		throws RDFException {
-		int rating;
-		try {
-			Statement ratingStmt = resource.getProperty(MIES.rating);
-			int currentRating = ratingStmt.getInt();
-			resource.getModel().remove(ratingStmt);
-			rating = (int) (currentRating * ratingFactor);
-		} catch (RDFException e) {
-			//get defaults
-			rating = defaultRating;
-		}
-		resource.getModel().add(resource, MIES.rating, rating);
-	}
-	*/
+	/*
+	 * public static void adaptRating( Resource resource, float ratingFactor,
+	 * int defaultRating) throws RDFException { int rating; try { Statement
+	 * ratingStmt = resource.getProperty(MIES.rating); int currentRating =
+	 * ratingStmt.getInt(); resource.getModel().remove(ratingStmt); rating =
+	 * (int) (currentRating * ratingFactor); } catch (RDFException e) { //get
+	 * defaults rating = defaultRating; } resource.getModel().add(resource,
+	 * MIES.rating, rating); }
+	 */
 	private static char createRandomChar() {
 		return (char) ('a' + (Math.random() * ('z' - 'a')));
 	}
@@ -108,13 +98,13 @@ public class Util {
 
 	public static String createURN5() {
 		StringBuffer result = new StringBuffer("urn:urn-5:");
-		result.append(
-			replaceSlashWithHyphen(
-				new String(Base64.encode(createRandomBytes(20)))));
+		result.append(replaceSlashWithHyphen(new String(Base64
+				.encode(createRandomBytes(20)))));
 		return result.toString();
 	}
 
-	/** replaces slashes with hyphens and removes padding=
+	/**
+	 * replaces slashes with hyphens and removes padding=
 	 * 
 	 * @param origin
 	 * @return
@@ -141,47 +131,34 @@ public class Util {
 	 * @param resource
 	 * @param string
 	 */
-	/*public static void addOrigin(Resource resource, String serverBaseURI)
-		throws RDFException {
-		Resource annotationSource =
-			createAnnotationSource(resource, serverBaseURI);
-		StmtIterator currentOrigins = resource.listProperties(MIES.origin);
-		if (!currentOrigins.hasNext()) {
-			resource.addProperty(MIES.origin, annotationSource);
-		}
-	}*/
+	/*
+	 * public static void addOrigin(Resource resource, String serverBaseURI)
+	 * throws RDFException { Resource annotationSource =
+	 * createAnnotationSource(resource, serverBaseURI); StmtIterator
+	 * currentOrigins = resource.listProperties(MIES.origin); if
+	 * (!currentOrigins.hasNext()) { resource.addProperty(MIES.origin,
+	 * annotationSource); } }
+	 */
 
-	/** get a resource from model with the same origin as resource
+	/**
+	 * get a resource from model with the same origin as resource
+	 * 
 	 * @param resource
 	 * @param model
 	 * @return
 	 */
-	/*public static Resource getExistingResource(
-		Resource resource,
-		Model model) {
-		try {
-			Resource origin =
-				(Resource) (resource.getProperty(MIES.origin).getObject());
-			Resource[] originInModel = getEquivalentResources(origin, model);
-			if (originInModel == null) {
-				logger.debug("No such origin");
-				return null;
-			}
-			Resource result = null;
-			for (int i = 0; i < originInModel.length; i++) {
-				StmtIterator resultIter =
-					model.listStatements(
-						new SelectorImpl(null, MIES.origin, originInModel[i]));
-				if (resultIter.hasNext()) {
-					result = resultIter.next().getSubject();
-					break;
-				}
-			}
-			return result;
-		} catch (RDFException ex) {
-			return null;
-		}
-	}*/
+	/*
+	 * public static Resource getExistingResource( Resource resource, Model
+	 * model) { try { Resource origin = (Resource)
+	 * (resource.getProperty(MIES.origin).getObject()); Resource[] originInModel =
+	 * getEquivalentResources(origin, model); if (originInModel == null) {
+	 * logger.debug("No such origin"); return null; } Resource result = null;
+	 * for (int i = 0; i < originInModel.length; i++) { StmtIterator resultIter =
+	 * model.listStatements( new SelectorImpl(null, MIES.origin,
+	 * originInModel[i])); if (resultIter.hasNext()) { result =
+	 * resultIter.next().getSubject(); break; } } return result; } catch
+	 * (RDFException ex) { return null; } }
+	 */
 
 	/**
 	 * @return
@@ -195,7 +172,7 @@ public class Util {
 	 * @return
 	 */
 	public static String formatDate(Date date) {
-		//return a date compliant with http://www.w3.org/TR/NOTE-datetime
+		// return a date compliant with http://www.w3.org/TR/NOTE-datetime
 		return new W3CDateFormat().format(date);
 	}
 
@@ -205,21 +182,32 @@ public class Util {
 	 */
 	public static String sha1(String s) {
 		MessageDigest md = null;
-		try { md = MessageDigest.getInstance("SHA1"); }
-		catch(NoSuchAlgorithmException e) {
+		try {
+			md = MessageDigest.getInstance("SHA1");
+		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException("sha1 not supported by plattform");
 		}
 		try {
 			byte[] result = md.digest(s.getBytes("UTF-8"));
-			StringBuffer resultBuffer = new StringBuffer();
-			for (int i = 0; i < result.length; i++) {
-				resultBuffer.append(byte2Hex(result[i]));
-			}
-			return resultBuffer.toString();
+			return bytes2HexString(result);
 		} catch (UnsupportedEncodingException ex) {
 			throw new RuntimeException("utf-8 not supported by plattform");
 		}
-	
+
+	}
+
+	/**
+	 * Converts an array of bytes to a string of two digits hex-representations
+	 * 
+	 * @param bytes
+	 * @return
+	 */
+	public static String bytes2HexString(byte[] bytes) {
+		StringBuffer resultBuffer = new StringBuffer();
+		for (int i = 0; i < bytes.length; i++) {
+			resultBuffer.append(byte2Hex(bytes[i]));
+		}
+		return resultBuffer.toString();
 	}
 
 	/**
@@ -231,11 +219,11 @@ public class Util {
 		String hexChars = "0123456789abcdef";
 		byte low = (byte) (i % 16);
 		byte high = (byte) (i / 16);
-		return ""+hexChars.charAt(high)+hexChars.charAt(low);
-	}
-	private static int unsignedByteToInt(byte b) {
-	    return (int) b & 0xFF;
+		return "" + hexChars.charAt(high) + hexChars.charAt(low);
 	}
 
+	private static int unsignedByteToInt(byte b) {
+		return (int) b & 0xFF;
+	}
 
 }
