@@ -17,7 +17,6 @@
 package org.wymiwyg.commons.util.io;
 
 import java.io.PrintWriter;
-import java.io.Writer;
 
 /**
  * @author reto
@@ -36,8 +35,8 @@ public class IndentPrintWriter extends PrintWriter {
 	}
 
 	public void println(String x) {
-		base.println(x);
 		print("\t");
+		base.println(x);
 	}
 
 

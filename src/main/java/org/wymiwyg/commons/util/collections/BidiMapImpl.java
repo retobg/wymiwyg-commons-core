@@ -73,16 +73,14 @@ public class BidiMapImpl<K,V> implements BidiMap<K, V> {
 	 */
 	public V put(K key, V value) {
 		//remove possible existing with same value
-		//throwing exception: GVS specific
+
 		if (backward.containsKey(value)) {
-			throw new RuntimeException("value already present");
-			/*K oldKey = backward.get(value);
-			forward.remove(oldKey);*/
+			K oldKey = backward.get(value);
+			forward.remove(oldKey);
 		}
 		if (forward.containsKey(key)) {
-			throw new RuntimeException("key already present");
-			/*V oldValue = forward.get(key);
-			backward.remove(oldValue);*/
+			V oldValue = forward.get(key);
+			backward.remove(oldValue);
 		}
 		backward.put(value, key);
 		return forward.put(key, value);
