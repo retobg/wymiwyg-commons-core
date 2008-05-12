@@ -1,6 +1,8 @@
 package org.wymiwyg.commons.timelogger;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +13,45 @@ import org.wymiwyg.commons.util.io.IndentPrintWriter;
  * <code>startSection</code> and <code>endSection</code>.
  */
 public class TimeLogger {
-	SectionTimeLogger currentTimeSectionLogger;
-	private List<SectionTimeLogger> sections = new ArrayList<SectionTimeLogger>();
+	/**
+	 * @author reto
+	 *
+	 */
+	private static final class IndentedReportWriter implements ReportWriter {
+		/**
+		 * @param sections
+		 * @param writer
+		 */
+		private void printSections(Iterable<Section> sections,
+				PrintWriter writer) {
+			for (Section section : sections) {
+				writer.println(section.getTimeElapsedInMillis() + "ms - "
+						+ section.getIdentifier());
+				printSections(section.subSections(), new IndentPrintWriter(writer));
+			}
+			writer.flush();
+		}
+
+		public void write(Iterable<Section> sections, Writer writer) {
+			PrintWriter printWriter = new PrintWriter(writer);
+			printSections(sections, printWriter);
+			printWriter.flush();
+			
+		}
+	}
+
+	private SectionTimeLogger currentTimeSectionLogger;
+	private List<Section> sections = new ArrayList<Section>();
+	private static ReportWriterFactory reportWriterFactory = new ReportWriterFactory() {
+
+		public ReportWriter getReportWriter() {
+			return new IndentedReportWriter();
+		}
+		
+	};
+	private ReportWriter reportWriter = reportWriterFactory.getReportWriter();
 	private static final List<TimeLogger> activeSectionsPath = new ArrayList<TimeLogger>();
+	
 
 	public TimeLogger startSection(String description) {
 		if (currentTimeSectionLogger != null) {
@@ -32,19 +70,10 @@ public class TimeLogger {
 		currentTimeSectionLogger = null;
 	}
 
-	public int countSetions() {
-		return sections.size();
-	}
-
-	public void writeReport(PrintWriter writer) {
-		for (SectionTimeLogger section : sections) {
-			writer.println(section.getTimeElapsed() + "ms - "
-					+ section.description);
-			if (section.countSetions() > 0) {
-				section.writeReport(new IndentPrintWriter(writer));
-			}
-		}
-		writer.flush();
+	public void writeReport(Writer writer) throws IOException {
+		reportWriter.write(sections, writer);
+		
+		
 	}
 
 	/**
@@ -61,4 +90,29 @@ public class TimeLogger {
 	public static TimeLogger getCurrentSectionTimeLogger() {
 		return activeSectionsPath.get(activeSectionsPath.size()-1);
 	}
+
+	/**
+	 * @return the sections
+	 */
+	public List<Section> getSections() {
+		return sections;
+	}
+
+	/**
+	 * @return the reportWriter
+	 */
+	public ReportWriter getReportWriter() {
+		return reportWriter;
+	}
+
+	/**
+	 * @param reportWriter the reportWriter to set
+	 */
+	public void setReportWriter(ReportWriter reportWriter) {
+		this.reportWriter = reportWriter;
+	}
+
+
+	
+	
 }
