@@ -106,4 +106,10 @@ public interface PathNode {
 	 */
 	public Date getLastModified();
 
+	/**
+	 *
+	 * @return true if the PathNode points to an existing entity.
+	 */
+	public boolean exists();
+
 }

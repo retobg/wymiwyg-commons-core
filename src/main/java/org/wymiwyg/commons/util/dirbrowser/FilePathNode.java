@@ -142,4 +142,8 @@ public class FilePathNode implements PathNode {
 		return new Date(file.lastModified());
 	}
 
+	public boolean exists() {
+		return file.exists();
+	}
+
 }

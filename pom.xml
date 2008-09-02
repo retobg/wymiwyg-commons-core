@@ -10,7 +10,8 @@
 	</parent>
 	<groupId>org.wymiwyg</groupId>
 	<artifactId>wymiwyg-commons-core</artifactId>
-	<version>0.7.1</version>
+	<name>WYMIWYG Commons Core</name>
+	<version>0.7.2</version>
 	<packaging>bundle</packaging>
 	<description>A set of utility classes and dependencies</description>
 	<dependencies>

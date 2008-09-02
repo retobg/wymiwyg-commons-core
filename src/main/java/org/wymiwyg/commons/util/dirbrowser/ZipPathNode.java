@@ -254,4 +254,9 @@ public class ZipPathNode implements PathNode {
 			return null;
 		}
 	}
+
+	public boolean exists() {
+		ZipEntry entry = file.getEntry(entryName);
+		return entry != null;
+	}
 }

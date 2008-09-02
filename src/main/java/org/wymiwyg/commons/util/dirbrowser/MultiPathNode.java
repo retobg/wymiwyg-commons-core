@@ -214,4 +214,13 @@ public class MultiPathNode implements PathNode {
 		}
 		return lastModified;
 	}
+
+	public boolean exists() {
+		for (PathNode pathNode : nodes) {
+			if (pathNode.exists()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
