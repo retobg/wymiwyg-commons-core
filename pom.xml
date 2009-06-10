@@ -11,7 +11,7 @@
 	<groupId>org.wymiwyg</groupId>
 	<artifactId>wymiwyg-commons-core</artifactId>
 	<name>WYMIWYG Commons Core</name>
-	<version>0.7.2</version>
+	<version>0.7.3</version>
 	<packaging>bundle</packaging>
 	<description>A set of utility classes and dependencies</description>
 	<dependencies>
@@ -36,6 +36,11 @@
 			<version>4.4</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.6</version>
+        </dependency>
 	</dependencies>
 	<distributionManagement>
 		<!-- <repository>

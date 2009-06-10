@@ -6,6 +6,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.wymiwyg.commons.util.io.IndentPrintWriter;
 
 /**
@@ -13,6 +15,8 @@ import org.wymiwyg.commons.util.io.IndentPrintWriter;
  * <code>startSection</code> and <code>endSection</code>.
  */
 public class TimeLogger {
+
+	final private Logger log = LoggerFactory.getLogger(TimeLogger.class);
 	/**
 	 * @author reto
 	 *
@@ -67,6 +71,9 @@ public class TimeLogger {
 		//with multiple indepented time logger its not always the last
 		activeSectionsPath.remove(currentTimeSectionLogger);
 		sections.add(currentTimeSectionLogger);
+		log.info("ending section {} after {} ms",
+				currentTimeSectionLogger.getIdentifier(),
+				currentTimeSectionLogger.getTimeElapsedInMillis());
 		currentTimeSectionLogger = null;
 	}
 
