@@ -13,6 +13,14 @@ import java.util.Map;
  */
 public interface  BidiMap<K,V> extends Map<K,V> {
 	public K getKey(V value);
+
+	/**
+	 * returns an inverted version of this map, the inverted map reference to
+	 * the same entries, subsequent changes to either of the map affect both.
+	 *
+	 * @return an
+	 */
+	public BidiMap<V,K> inverse();
 }
 /*
 (c) Copyright 2005, 2006 Hewlett-Packard Development Company, LP

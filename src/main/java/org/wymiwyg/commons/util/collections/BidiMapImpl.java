@@ -16,14 +16,20 @@ import java.util.Set;
  */
 public class BidiMapImpl<K,V> implements BidiMap<K, V> {
 
-	private Map<K,V> forward = new HashMap<K,V>();
-	private Map<V,K> backward = new HashMap<V,K>();
+	private final Map<K,V> forward;
+	private final Map<V,K> backward;
 	
 	/**
 	 * 
 	 */
 	public BidiMapImpl() {
-		super();
+		forward = new HashMap<K,V>();
+		backward = new HashMap<V,K>();
+	}
+
+	private BidiMapImpl(final Map<K,V> forward, final Map<V,K> backward) {
+		this.forward = forward;
+		this.backward = backward;
 	}
 
 	/* (non-Javadoc)
@@ -133,6 +139,10 @@ public class BidiMapImpl<K,V> implements BidiMap<K, V> {
 	 */
 	public Set<Entry<K,V>> entrySet() {
 		return forward.entrySet();
+	}
+
+	public BidiMap<V, K> inverse() {
+		return new BidiMapImpl(backward, forward);
 	}
 
 }
