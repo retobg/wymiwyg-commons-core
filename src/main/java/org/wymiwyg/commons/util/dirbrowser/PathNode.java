@@ -98,7 +98,11 @@ public interface PathNode {
 	 * @return the size of the entry or -1
 	 */
 	public long getLength();
-	
+
+	/**
+	 *
+	 * @return a slash separated string representation of this path
+	 */
 	public String getPath();
 
 	/**

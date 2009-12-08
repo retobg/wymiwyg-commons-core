@@ -11,7 +11,7 @@
 	<groupId>org.wymiwyg</groupId>
 	<artifactId>wymiwyg-commons-core</artifactId>
 	<name>WYMIWYG Commons Core</name>
-	<version>0.7.4</version>
+	<version>0.7.5</version>
 	<packaging>bundle</packaging>
 	<description>A set of utility classes and dependencies</description>
 	<dependencies>

@@ -61,6 +61,7 @@ package org.wymiwyg.commons.util.dirbrowser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -80,7 +81,7 @@ public class MultiPathNode implements PathNode {
 	/**
 	 * 
 	 */
-	public MultiPathNode(PathNode[] nodes) {
+	public MultiPathNode(PathNode... nodes) {
 		this.nodes = nodes;
 	}
 
@@ -191,11 +192,44 @@ public class MultiPathNode implements PathNode {
 		return -1;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.wymiwyg.commons.util.dirbrowser.PathNode#getPath()
+	/**
+	 * @return the longest common subpath of the nodes this MultiPathNOde consists of
 	 */
 	public String getPath() {
-		return null;
+		String currentLongest = nodes[0].getPath();
+		for (int i = 1; i < nodes.length; i++) {
+			currentLongest = getLongestCommonSuffix(currentLongest, nodes[i].getPath());
+		}
+		return currentLongest;
+	}
+
+	private String getLongestCommonSuffix(String a, String b) {
+		List<String> commonSections = new ArrayList<String>();
+		String[] aSects = a.split("/");
+		String[] bSects = b.split("/");
+		for (int i = 1; i <= a.length(); i++) {
+			if ((i > aSects.length) ||
+				(i > bSects.length)) {
+				break;
+			}
+			final String section = aSects[aSects.length - i];
+			if (section.equals(bSects[bSects.length-i])) {
+				commonSections.add(0, section);
+			} else {
+				break;
+			}
+		}
+		StringBuffer buffer = new StringBuffer();
+		boolean first = true;
+		for (String string : commonSections) {
+			if (!first) {
+				buffer.append('/');
+			} else {
+				first = false;
+			}
+			buffer.append(string);
+		}
+		return buffer.toString();
 	}
 
 	/* (non-Javadoc)
