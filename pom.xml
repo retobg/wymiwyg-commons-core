@@ -14,6 +14,7 @@
 	<version>0.7.5</version>
 	<packaging>bundle</packaging>
 	<description>A set of utility classes and dependencies</description>
+	<url>http://developer.berlios.de/projects/wymiwyg/</url>
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -67,5 +68,17 @@
 			</plugin>
 		</plugins>
 	</build>
+	<scm>
+		<developerConnection>scm:svn:https://svn.berlios.de/svnroot/repos/wrhapi/</developerConnection>
+		<connection>scm:svn:http://svn.berlios.de/svnroot/repos/wrhapi/</connection>
+		<url>http://svn.berlios.de/svnroot/repos/wrhapi/</url>
+	</scm>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 </project>
 
