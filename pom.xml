@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>wymiwyg</artifactId>
@@ -9,7 +11,7 @@
 	<groupId>org.wymiwyg</groupId>
 	<artifactId>wymiwyg-commons-core</artifactId>
 	<name>WYMIWYG Commons Core</name>
-	<version>0.7.6</version>
+	<version>0.7.6-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<description>A set of utility classes and dependencies</description>
 	<url>http://developer.berlios.de/projects/wymiwyg/</url>
@@ -67,9 +69,9 @@
 		</plugins>
 	</build>
 	<scm>
-		<developerConnection>scm:svn:https://svn.berlios.de/svnroot/repos/wrhapi/tags/wymiwyg-commons-core-0.7.6</developerConnection>
-		<connection>scm:svn:http://svn.berlios.de/svnroot/repos/wrhapi/tags/wymiwyg-commons-core-0.7.6</connection>
-		<url>http://svn.berlios.de/svnroot/repos/wrhapi/tags/wymiwyg-commons-core-0.7.6</url>
+		<developerConnection>scm:svn:https://svn.berlios.de/svnroot/repos/wymiwyg/wymiwyg-commons-core/trunk/</developerConnection>
+		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/wymiwyg/wymiwyg-commons-core/trunk/</connection>
+		<url>https://svn.berlios.de/svnroot/repos/wymiwyg/wymiwyg-commons-core/trunk/</url>
 	</scm>
 	<licenses>
 		<license>
