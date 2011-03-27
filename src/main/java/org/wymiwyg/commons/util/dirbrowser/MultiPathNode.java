@@ -76,12 +76,19 @@ import org.apache.commons.logging.LogFactory;
 public class MultiPathNode implements PathNode {
 	private static final Log log = LogFactory.getLog(MultiPathNode.class);
 
-	PathNode[] nodes;
+	private final PathNode[] nodes;
 
 	/**
 	 * 
 	 */
 	public MultiPathNode(PathNode... nodes) {
+		int i = 0;
+		for (PathNode n : nodes) {
+			if (n == null) {
+				throw new IllegalArgumentException("Pathnode at position "+i+" is null");
+			}
+			i++;
+		}
 		this.nodes = nodes;
 	}
 
@@ -89,10 +96,15 @@ public class MultiPathNode implements PathNode {
 	 * @see org.wymiwyg.commons.util.dirbrowser.PathNode#getSubPath(java.lang.String)
 	 */
 	public PathNode getSubPath(String requestPath) {
-		PathNode[] subNodes = new PathNode[nodes.length];
-		for (int i = 0; i < subNodes.length; i++) {
-			subNodes[i] = nodes[i].getSubPath(requestPath);
+		List<PathNode> subNodeList = new ArrayList<PathNode>();
+		for (int i = 0; i < nodes.length; i++) {
+			PathNode subNode = nodes[i].getSubPath(requestPath);
+			if (subNode != null) {
+				subNodeList.add(subNode);
+			}
 		}
+		PathNode[] subNodes = new PathNode[subNodeList.size()];
+		subNodes = subNodeList.toArray(subNodes);
 		return new MultiPathNode(subNodes);
 	}
 
