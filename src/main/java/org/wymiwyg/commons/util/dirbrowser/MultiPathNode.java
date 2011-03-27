@@ -65,7 +65,9 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -124,7 +126,7 @@ public class MultiPathNode implements PathNode {
 	 * @see org.wymiwyg.commons.util.dirbrowser.PathNode#list(org.wymiwyg.commons.util.dirbrowser.PathNameFilter)
 	 */
 	public String[] list(PathNameFilter filter) {
-		List resultList = new ArrayList();
+		Set resultList = new HashSet();
 		for (int i = 0; i < nodes.length; i++) {
 			String[] subList = nodes[i].list(filter);
 			if (subList != null) {
@@ -137,7 +139,7 @@ public class MultiPathNode implements PathNode {
 	 * @see org.wymiwyg.commons.util.dirbrowser.PathNode#list()
 	 */
 	public String[] list() {
-		List resultList = new ArrayList();
+		Set resultList = new HashSet();
 		for (int i = 0; i < nodes.length; i++) {
 			String[] subList = nodes[i].list();
 			if (subList != null) {
