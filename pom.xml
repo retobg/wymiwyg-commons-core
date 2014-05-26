@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>wymiwyg</artifactId>
 		<groupId>org.wymiwyg</groupId>
-		<version>0.9.4</version>
+		<version>0.9.6</version>
 	</parent>
 	<groupId>org.wymiwyg</groupId>
 	<artifactId>wymiwyg-commons-core</artifactId>
@@ -22,12 +22,12 @@
 		<dependency>
 			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
-			<version>1.1</version>
+			<version>1.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
-			<version>3.4.4</version>
+			<version>53.1</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -38,7 +38,7 @@
 		<dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.8</version>
+            <version>1.7.7</version>
         </dependency>
 	</dependencies>
 	

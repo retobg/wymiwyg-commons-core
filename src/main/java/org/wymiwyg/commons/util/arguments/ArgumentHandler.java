@@ -59,6 +59,7 @@
 
 package org.wymiwyg.commons.util.arguments;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -104,4 +105,52 @@ public class ArgumentHandler {
 
 		return instance;
 	}
+    
+    /**
+     * Returns an instance of A if the arguments could be correctly parsed 
+     * and A was not a subclass of ArgumentsWithHelp or no help was requested, null
+     * otherwise.
+     * @param <A>
+     * @param interfaceClass
+     * @param args
+     * @return 
+     */
+    public static <A> A readArguments(Class<A> interfaceClass, String[] args) {
+        A result = null;
+        try {
+            final ArgumentHandler argumentHandler = new ArgumentHandler(args);
+            result = argumentHandler.getInstance(interfaceClass);
+            argumentHandler.processArguments(new ArgumentProcessor() {
+
+                @Override
+                public void process(List<String> remaining) throws InvalidArgumentsException {
+                    if (remaining.size() > 0) {
+                        throw new InvalidArgumentsException("The following arguments could not be understood: " + remaining);
+                    }
+                }
+            });
+        } catch (InvalidArgumentsException e) {
+            System.out.println(e.getMessage());
+            showUsage(interfaceClass);
+            result = null;
+        }
+        if (result instanceof ArgumentsWithHelp) {
+            if (((ArgumentsWithHelp)result).getHelp()) {
+                showUsage(interfaceClass);
+                result = null;
+            }
+        }
+        return result;
+    }
+    
+    
+    private static <I> void showUsage(Class<I> interfaceClass) {
+        System.out.print("This command has the following arguments: ");
+        System.out.println(AnnotatedInterfaceArguments.getArgumentsSyntax(interfaceClass));
+        PrintWriter out = new PrintWriter(System.out, true);
+        AnnotatedInterfaceArguments.printArgumentDescriptions(
+                interfaceClass, out);
+        out.flush();
+    }
+    
 }

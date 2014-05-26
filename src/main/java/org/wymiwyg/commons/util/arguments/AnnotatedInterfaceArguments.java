@@ -334,7 +334,7 @@ public class AnnotatedInterfaceArguments<T> implements ArgumentProcessor {
 			if (returnType.equals(File.class)) {
 				writer.write(" filename");
 			} else {
-				writer.write(" string");
+				writer.write(" "+returnType.getSimpleName().toLowerCase());
 			}
 		}
 	}
