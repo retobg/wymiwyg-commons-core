@@ -67,8 +67,8 @@
 		</plugins>
 	</build>
 	<scm>
-		<developerConnection>scm:git:git@github.com:retog/wymiwyg-commons-core.git</developerConnection>
-		<connection>scm:git:https://github.com/retog/wymiwyg-commons-core.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:retog/wymiwyg-commons-core.git</developerConnection>
+		<connection>scm:git:ssh://github.com:retog/wymiwyg-commons-core.git</connection>
 		<url>https://github.com/retog/wymiwyg-commons-core/</url>
 	</scm>
 	<licenses>
