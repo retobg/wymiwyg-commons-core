@@ -9,7 +9,7 @@
     <groupId>org.wymiwyg</groupId>
     <artifactId>wymiwyg-commons-core</artifactId>
     <name>WYMIWYG Commons Core</name>
-    <version>0.8-SNAPSHOT</version>
+    <version>0.8</version>
     <packaging>bundle</packaging>
     <description>A set of utility classes and dependencies</description>
     <url>https://github.com/retog/wymiwyg-commons-core/</url>
@@ -79,7 +79,8 @@
         <developerConnection>scm:git:git@github.com:retog/wymiwyg-commons-core.git</developerConnection>
         <connection>scm:git:https://github.com/retog/wymiwyg-commons-core.git</connection>
         <url>https://github.com/retog/wymiwyg-commons-core/</url>
-    </scm>
+      <tag>wymiwyg-commons-core-0.8-RC-4</tag>
+  </scm>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
