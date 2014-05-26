@@ -12,7 +12,7 @@
 	<version>0.8-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<description>A set of utility classes and dependencies</description>
-	<url>http://developer.berlios.de/projects/wymiwyg/</url>
+	<url>https://github.com/retog/wymiwyg-commons-core/</url>
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -67,9 +67,9 @@
 		</plugins>
 	</build>
 	<scm>
-		<developerConnection>scm:svn:https://svn.berlios.de/svnroot/repos/wymiwyg/wymiwyg-commons-core/trunk/</developerConnection>
-		<connection>scm:svn:https://svn.berlios.de/svnroot/repos/wymiwyg/wymiwyg-commons-core/trunk/</connection>
-		<url>https://svn.berlios.de/svnroot/repos/wymiwyg/wymiwyg-commons-core/trunk/</url>
+		<developerConnection>scm:git:git@github.com:retog/wymiwyg-commons-core.git</developerConnection>
+		<connection>scm:git:https://github.com/retog/wymiwyg-commons-core.git</connection>
+		<url>https://github.com/retog/wymiwyg-commons-core/</url>
 	</scm>
 	<licenses>
 		<license>
